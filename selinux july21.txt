@@ -1,0 +1,206 @@
+[root@rh selinux]# history
+    1  dnf install -y httpd
+    2  systemctl enable --now httpd
+    3  ls -Zd /var/www/html/
+    4  ls -Z /var/www/html/
+    5  ls -Zd /var/www/html/
+    6  ps -Zaux | grep http
+    7  cd /home
+    8  ls -Z
+    9  cd
+   10  mkdir /web
+   11  vim /web/index.html
+   12  vim /etc/httpd/conf/httpd.conf 
+   13  systemctl restart httpd
+   14  curl http://localhost
+   15  getenforce
+   16  setenforce permissive
+   17  getenforce
+   18  curl http://localhost
+   19  vim /etc/httpd/conf/httpd.conf 
+   20  systemctl restart httpd
+   21  getenforce
+   22  curl http://localhost
+   23  getenforce
+   24  setenforce enforcing
+   25  curl http://localhost
+   26  grep AVC /var/log/audit/audit.log 
+   27  yum install -y git
+   28  git clone https://github.com/sandervanvugt/selinux
+   29  cd selinux/
+   30  ls
+   31  cd ..
+   32  git clone https://github.com/sandervanvugt/luth
+   33  luth/countdown 12
+   34  history
+   35  systemctl status auditd
+   36  ls -lZ /web
+   37  ps Zaux | grep http
+   38  ls -Zd /var/www
+   39  ls -Z /var/www
+   40  semanage --help | less
+   41  man semanage-fcontext
+   42  semanage fcontext -a -t httpd_sys_content_t "/web(/.*)?"
+   43  ls -ldZ /web
+   44  restorecon -Rv /web
+   45  setenforce enforcing
+   46  curl http://localhost
+   47  cat /etc/selinux/config 
+   48  git clone https://github.com/SELinuxProject/refpolicy
+   49  sestatus
+   50  ps Zaux | less
+   51  ps aux | grep dbus-dae
+   52  ps Zaux | grep dbus-dae
+   53  cd /var/www/
+   54  ls
+   55  ls -Z
+   56  cd
+   57  luth/countdown 12
+   58  semanage fcontext -l 
+   59  semanage fcontext -l | wc
+   60  semanage fcontext -l | grep http
+   61  seinfo -t
+   62  seinfo -t | wc
+   63  seinfo -t | grep http
+   64  man -k _selinux
+   65  dnf install selinux-policy-doc
+   66  mandb
+   67  man -k _selinux
+   68  man -k _selinux | wc
+   69  man -k _selinux | grep http
+   70  vim /etc/ssh/sshd_config 
+   71  systemctl restart sshd
+   72  systemctl status sshd.service
+   73  grep AVC /var/log/audit/audit.log 
+   74  vim /etc/ssh/sshd_config 
+   75  man semanage-port
+   76  semanage port -a -t ssh_port_t -p tcp 2022
+   77  systemctl restart sshd
+   78  systemctl status sshd
+   79  vim /etc/ssh/sshd_config 
+   80  systemctl restart sshd
+   81  getsebool -a
+   82  getsebool -a |wc
+   83  getsebool -a | grep vsftp
+   84  getsebool -a | grep ftp
+   85  setsebool -P ftpd_use_cifs on
+   86  journalctl | grep sealert
+   87  sealert -l a81809fc-4cf5-4e40-8919-011c53414f68 | less
+   88  journalctl | grep sealert
+   89  sealert -l 2610c5b2-10af-4596-b07f-faa3a18ba593 | less
+   90  ls -lZ /etc/passwd
+   91  yum install vsftpd
+   92  yum install lftp
+   93  vim /etc/vsftpd/vsftpd.conf 
+   94  systemctl restart vsftpd
+   95  lftp localhost
+   96  chmod 777 /var/ftp/pub/
+   97  lftp localhost
+   98  grep AVC /var/log/audit/audit.log 
+   99  journalctl | grep sealert
+  100  sealert -l 27d26ac4-9e13-487e-aadf-5a776dbb2c9c | less
+  101  # semanage fcontext -a -t public_content_rw_t pub
+  102  # restorecon -R -v pub
+  103  # setsebool -P allow_ftpd_anon_write 1
+  104  cd /var/ftp
+  105  semanage fcontext -a -t public_content_rw_t pub
+  106  restorecon -R -v pub
+  107  setsebool -P allow_ftpd_anon_write 1
+  108  lftp localhost
+  109  systemctl restart vsftpd
+  110  lftp localhost
+  111  cd
+  112  luth/countdown 18
+  113  grep AVC /var/log/audit/audit.log 
+  114  journalctl | grep sealert
+  115  history
+  116  ls -dZ /var/ftp/pub
+  117  semanage fcontext -a -t public_content_rw_t /var/ftp/pub
+  118  restorecon -Rv /var/ftp/pub
+  119  ls -dZ /var/ftp/pub
+  120  journalctl | grep sealert
+  121  sealert -l 27d26ac4-9e13-487e-aadf-5a776dbb2c9c | less
+  122  lftp localhost
+  123  cd /etc/selinux/
+  124  ls
+  125  cd targeted/
+  126  ls
+  127  cd contexts/
+  128  ls
+  129  cd files/
+  130  ls
+  131  cat file_contexts.local
+  132  man semanage-fcontext
+  133  semanage fcontext -d -t public_content_rw_t pub
+  134  ls
+  135  cat file_contexts.local
+  136  cd
+  137  podman run -d quay.io/bitnami/nginx
+  138  ps fax
+  139  ps faxZ
+  140  mkdir -p /srv/dbfiles
+  141  chown -R 27:27 /srv/dbfiles
+  142  #podman run -d -v /srv/dbfiles:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password registry.access.redhat.com/rhscl/mysql-57-rhel7
+  143  podman login reigstry.access.redhat.com
+  144  podman login registry.access.redhat.com
+  145  podman run -d -v /srv/dbfiles:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password registry.access.redhat.com/rhscl/mysql-57-rhel7
+  146  podman ps
+  147  podman ps -a
+  148  grep AVC /var/log/audit/audit.log 
+  149  journalctl | grep sealert
+  150  sealert -l b6739b67-2951-455c-8a99-3dfa2df110a9 | less
+  151  semanage fcontext -a -t container_file_t "/srv/dbfiles(/.*)?"
+  152  restorecon -Rv /srv/dbfiles/
+  153  podman ps -a
+  154  podman rm xenodochial_chebyshev 
+  155  podman run -d -v /srv/dbfiles:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password registry.access.redhat.com/rhscl/mysql-57-rhel7
+  156  podman ps
+  157  cd /srv/dbfiles/
+  158  ls -Z
+  159  cd
+  160  getsebool -a | grep ftp
+  161  sesearch -b ftpd_anon_write -A
+  162  sesearch -b ftpd_full_access -A
+  163  ldd $(which httpd)
+  164  seinfo -tunconfined_t
+  165  seinfo -aunconfined_domain_type -x
+  166  semodule -l | less
+  167  grep http /var/log/audit/audit.log > httplog.txt
+  168  vim httplog.txt 
+  169  grep http /var/log/audit/audit.log | grep AVC > httplog.txt
+  170  vim httplog.txt 
+  171  cat httplog.txt | audit2allow -M mymodule
+  172  ls
+  173  vim mymodule.
+  174  vim mymodule.te
+  175  semodule -i mymodule.pp
+  176  semodule -d mymodule.pp
+  177  semodule --help
+  178  luth/countdown 12
+  179  vim sander.te
+  180  vim sander.fc
+  181  checkmodule -M -m -o sander.mod sander.te
+  182  semodule_package -o sander.pp -m sander.mod -f sander.fc
+  183  semodule -o sander.pp 
+  184  semodule -i sander.pp 
+  185  mkdir /opt/sander
+  186  restorecon -Rv /opt/sander/
+  187  semanage user -l
+  188  useradd linda
+  189  passwd linda
+  190  useradd -Z sysadm_u -G wheel lisa
+  191  semanage login -a -s user_u linda
+  192  semanage login -l
+  193  cd selinux/
+  194  ls
+  195  ./setup-rot.sh 
+  196  ls
+  197  vim startrot13 
+  198  vim rot13.service 
+  199  sepolgen --application startrot13
+  200  vim startrot13.te 
+  201  ls
+  202  ./startrot13 
+  203  ls
+  204  ./startrot13.sh
+  205  seinfo -t | grep start
