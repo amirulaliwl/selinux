@@ -1,0 +1,21 @@
+student@student-virtual-machine:~$ history
+    1  sudo apt install policycoreutils selinux-utils selinux-basics
+    2  sudo getenforce
+    3  sudo selinux-activate 
+    4  sudo vim /etc/default/grub
+    5  sudo apt install vim git
+    6  sudo vim /etc/default/grub
+    7  sudo selinux-config-enforcing --help
+    8  sudo selinux-config-enforcing 
+    9  cat /etc/selinux/config 
+   10  sudo reboot
+   11  sudo getenforce
+   12  sudo sestatus
+   13  sudo systemctl status auditd
+   14  apt install auditd
+   15  sudo apt install auditd
+   16  sudo systemctl status auditd
+   17  sudo grep AVC /var/log/audit/audit.log 
+   18  sudo vim /etc/selinux/config 
+   19  history
+ 
