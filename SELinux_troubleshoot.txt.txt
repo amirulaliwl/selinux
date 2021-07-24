@@ -1,0 +1,30 @@
+ls -Zd /var/www/html/
+ps -Zaux | grep http
+cd /home
+ls -Z
+
+
+troubleshooting SELinux
+===================================
+getenforce
+setenforce <state>
+
+grep AVC /var/log/audit/audit.log --- access vector cache
+semanage --help
+fcontext
+
+man semanage-fcontext
+ls -ldZ /web
+restorecon -rv /web
+setenforce enforcing
+sestatus
+ps Zaux | less  
+
+https://pastebin.com/PBkytkma
+
+journalctl | grep sealert
+sesearch -b ftpd_anon_write -A 
+seinfo -tunconfined_t
+semodule -l | less
+seinfo -t | grep start 
+
